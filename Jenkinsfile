@@ -5,7 +5,7 @@ pipeline{
             steps {
                 echo "Hello World"
                 sh 'git --version'
-                sh 'ls -al /home/jenkins'
+                sh 'cat /etc/os-release'
                 sh 'cd /opt'
             }
         }
