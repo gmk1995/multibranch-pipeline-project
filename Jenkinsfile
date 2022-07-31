@@ -4,30 +4,27 @@ pipeline{
         stage("Build") {
             steps {
                 echo "Hello World"
-                sh 'git --version'
-                sh 'mkdir dir1'
-                sh 'touch f{1..5}'
-                sh 'cp f* dir1'
-                
+                sh 'yum install tree -y'
+                sh 'tree --version'    
             }
         }
+        stage("fix branch") {
+          when {
+            branch "fix-*"
+          }
+          steps {
+            sh '''
+              cat README.md
+            '''
+          }
+         }
+         stage("PR branch") {
+          when {
+            branch "PR-*"
+          }
+          steps {
+            echo 'Runs only for PRs'        
+           }
+          }
     }
-    stage('fix branch') {
-          when {
-          branch 'fix-*'
-          }
-          steps {
-          sh * * *
-          cat README.md
-          * * * 
-          }
-        }
-        stage('PR branch') {
-          when {
-          branch 'PR-*'
-          }
-          steps {
-          echo 'Run only for PRs'
-          }
-        }
-}   
+}
