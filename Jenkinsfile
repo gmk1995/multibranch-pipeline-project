@@ -4,7 +4,7 @@ pipeline{
         stage("Build") {
             steps {
                 echo "Hello World"
-                sh 'yum install tree -y'
+                sh 'sudo yum install tree -y'
                 sh 'tree --version'    
             }
         }
